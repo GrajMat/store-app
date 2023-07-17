@@ -27,7 +27,7 @@ const NavBar = ({ openCart }) => {
 
                 <Nav>
                     <Nav.Link to="/home" as={NavLink}>Home</Nav.Link>
-                    <Nav.Link to="/store" as={NavLink}>Store</Nav.Link>
+                    <Nav.Link to="/" as={NavLink}>Store</Nav.Link>
                     <Nav.Link to="/about" as={NavLink}>About</Nav.Link>
                 </Nav>
                 <Button
