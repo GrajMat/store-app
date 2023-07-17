@@ -23,7 +23,7 @@ function App() {
                 <ShoppingCart isOpen={isOpen} closeCart={closeCart} />
                 <main>
                     <Routes>
-                        <Route path="/store" element={<ProductsList />} />
+                        <Route path="/" element={<ProductsList />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/about" element={<About />} />
 
