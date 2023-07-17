@@ -23,8 +23,8 @@ function App() {
                 <ShoppingCart isOpen={isOpen} closeCart={closeCart} />
                 <main>
                     <Routes>
-                        <Route path="/" element={<Home />} />
                         <Route path="/store" element={<ProductsList />} />
+                        <Route path="/home" element={<Home />} />
                         <Route path="/about" element={<About />} />
 
                     </Routes>
