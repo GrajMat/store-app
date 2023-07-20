@@ -9,7 +9,7 @@ import { getProducts } from '../redux/productSlice';
 
 const CategoryList = (props) => {
 
-    const { skip, limit } = props
+    const { limit, setSkip, setCurrentPage } = props
     const [categoryList, setCategoryList] = useState([])
     const [activeItem, setActiveItem] = useState("All products")
 
@@ -32,14 +32,19 @@ const CategoryList = (props) => {
     const searchOnCategory = (e) => {
         const category = e.target.textContent
         setActiveItem(category)
+        setCurrentPage(0)
+        setSkip(() => {
+            const newSkip = 0
+            ProductDataService.findByCategory(newSkip, limit, category)
+                .then(response => {
+                    dispatch(getProducts(response.data))
+                })
+                .catch(e => {
+                    console.log(e)
+                })
 
-        ProductDataService.findByCategory(skip, limit, category)
-            .then(response => {
-                dispatch(getProducts(response.data))
-            })
-            .catch(e => {
-                console.log(e)
-            })
+            return newSkip
+        })
 
 
     }
@@ -53,6 +58,7 @@ const CategoryList = (props) => {
             return (
 
                 <ListGroup.Item
+                    className='m-1'
                     style={{ cursor: "pointer" }}
                     key={id}
                     onClick={searchOnCategory}
@@ -68,6 +74,8 @@ const CategoryList = (props) => {
         } else {
             return (
                 <ListGroup.Item
+                    className='m-1'
+
                     style={{ cursor: "pointer" }}
                     key={id}
                     onClick={searchOnCategory}
@@ -75,7 +83,7 @@ const CategoryList = (props) => {
                     variant="light"
                 >
                     {item}
-                </ListGroup.Item>
+                </ListGroup.Item >
             )
         }
     })
@@ -89,7 +97,9 @@ const CategoryList = (props) => {
                         {categories}
                     </ListGroup>
                     :
-                    null
+                    <ListGroup horizontal className='flex-wrap'>
+                        {categories}
+                    </ListGroup>
             }
 
         </Media>

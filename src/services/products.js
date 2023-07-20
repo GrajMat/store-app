@@ -11,11 +11,11 @@ class ProductDataService {
         return axios.get(`https://dummyjson.com/products/categories`)
     }
 
-    findByCategory(skip, limit, category) {
+    findByCategory(skip, limit, category, total) {
         if (category === 'All products') {
             return axios.get(`https://dummyjson.com/products/?skip=${skip}&limit=${limit}`)
         } else {
-            return axios.get(`https://dummyjson.com/products/category/${category}?skip=${skip}&limit=${limit}`)
+            return axios.get(`https://dummyjson.com/products/category/${category}?skip=${skip >= total ? 0 : skip}&limit=${limit}`)
 
         }
     }
